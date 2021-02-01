@@ -28,10 +28,15 @@ RUN \
 
 FROM trillinos_build as xyce
 
-COPY Xyce-7.1 /opt/Xyce/Xyce-7.1
+RUN \
+    mkdir -p /opt/Xyce && \
+    cd /opt/Xyce && \
+    git clone https://github.com/Xyce/Xyce.git && \
+    cd Xyce && \
+    git checkout Release-7.2.0
 
 RUN \
-    cd /opt/Xyce/Xyce-7.1 && \
+    cd /opt/Xyce/Xyce && \
     ./bootstrap && \
     mkdir build && \
     cd build && \
